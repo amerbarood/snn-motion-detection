@@ -1,0 +1,10 @@
+torch
+snntorch
+opencv-python
+numpy
+pywavelets
+scipy
+pandas
+matplotlib
+seaborn
+jupyter

@@ -1,0 +1,11 @@
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+.DS_Store
+
+# Downloaded VOT2015 data and model checkpoints
+data/
+vot2015/
+*.pt
+*.pth
+*.zip
