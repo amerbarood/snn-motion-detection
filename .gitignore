@@ -9,3 +9,8 @@ vot2015/
 *.pt
 *.pth
 *.zip
+models/
+outputs/
+results/
+.venv/
+.pytest_cache/
