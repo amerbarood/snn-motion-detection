@@ -25,7 +25,7 @@ Conventional CNNs look at frames one at a time. Biological vision instead reacts
 - **Labels:** the bounding-box centre (the average of its four vertices) is compared between the first and last frame of each clip, and the larger of the horizontal and vertical displacement sets the direction.
 - **Split:** stratified 70% train, 15% validation, 15% test, per sequence.
 
-The notebook downloads the data directly from the VOT servers, so no dataset is stored in this repo.
+`python main.py download` fetches the data directly from the VOT servers, so no dataset is stored in this repo.
 
 ## Method
 
@@ -81,8 +81,6 @@ Example of one sequence ("bag"): learning curves, confusion matrix and per-class
 │   ├── experiment.py                # one model per sequence -> results CSV
 │   └── analysis.py                  # summary table, class balance (NSD, entropy), plots
 ├── tests/                           # pytest checks on a synthetic moving-square sequence
-├── notebooks/
-│   └── snn_motion_direction.ipynb   # original Colab notebook
 ├── assets/                          # result figures used in this README
 ├── docs/
 │   └── presentation.pdf             # final project presentation
