@@ -72,24 +72,38 @@ Example of one sequence ("bag"): learning curves, confusion matrix and per-class
 ## Repository structure
 
 ```
+├── main.py                          # command-line entry point
+├── snn_motion/
+│   ├── vot.py                       # VOT2015 download
+│   ├── preprocessing.py             # frame differencing, Haar DWT, mini-videos, labels, splits
+│   ├── model.py                     # the spiking network (snnTorch)
+│   ├── train.py                     # training, early stopping, evaluation, per-sequence figure
+│   ├── experiment.py                # one model per sequence -> results CSV
+│   └── analysis.py                  # summary table, class balance (NSD, entropy), plots
+├── tests/                           # pytest checks on a synthetic moving-square sequence
 ├── notebooks/
-│   └── snn_motion_direction.ipynb   # full pipeline: data download, preprocessing, SNN, training, analysis
+│   └── snn_motion_direction.ipynb   # original Colab notebook
 ├── assets/                          # result figures used in this README
 ├── docs/
 │   └── presentation.pdf             # final project presentation
 └── requirements.txt
 ```
 
-## Running it
-
-The notebook was developed in Google Colab.
+## Running it (VS Code / Python)
 
 ```bash
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-jupyter notebook notebooks/snn_motion_direction.ipynb
+
+python main.py list                       # the 60 VOT2015 sequence names
+python main.py train bag                  # download one sequence, train, evaluate -> outputs/bag_results.png
+python main.py run-all                    # all sequences -> results/snn_results_<time>.csv
+python main.py run-all --sequences bag ball1 --epochs 100
+python main.py analyze results/snn_results_<time>.csv   # summary table + figures in outputs/analysis/
 ```
 
-Training on all 60 sequences takes a while on CPU, so a GPU runtime is recommended.
+Sequences download to `data/sequences/`, best models to `models/`. Hyperparameters (`--beta`, `--lr`, `--epochs`, `--patience`, `--batch-size`) default to the values in the table above. In VS Code, open the folder, select the `.venv` interpreter and use the **Run and Debug** panel (`.vscode/launch.json`). `pytest` runs quick checks on a synthetic sequence. Training on all 60 sequences takes a while on CPU, so a GPU is recommended.
 
 ## Limitations and future work
 
